@@ -10,7 +10,7 @@ user_states = {}  # Хранилище временных данных пол�
 @bot.message_handler(commands=['start'])
 def start(message):
     if message.chat.type == 'private':
-        bot.send_message(message.chat.id, "Привет! Как тебя подписать в сообщении? (Введи имя, ник или 'Аноним')")
+        bot.send_message(message.chat.id, "Привет! Как тебя подписать в сообщении?")
         user_states[message.chat.id] = {'step': 'get_name'}
 
 @bot.message_handler(func=lambda message: message.chat.type == 'private')
@@ -26,7 +26,7 @@ def handle_private(message):
     if state == 'get_name':
         user_states[user_id]['name'] = message.text
         user_states[user_id]['step'] = 'get_text'
-        bot.send_message(user_id, f"Принято! Тебя подпишем как: *{message.text}*.\nТеперь отправь текст сообщения, которое нужно переслать в группу.")
+        bot.send_message(user_id, f"Теперь отправь текст сообщения, которое нужно переслать в группу.")
         
     elif state == 'get_text':
         name = user_states[user_id]['name']
