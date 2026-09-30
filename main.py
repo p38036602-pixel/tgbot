@@ -10,10 +10,14 @@ user_states = {}  # Хранилище имени автора: {chat_id: "Им�
 
 @bot.message_handler(commands=['start'])
 def start(message):
+    # Если команду написали внутри ГРУППЫ, бот выдаст её точный ID
+    if message.chat.type in ['group', 'supergroup']:
+        bot.reply_to(message, f"ID этой группы: `{message.chat.id}`\nСкопируйте его вместе с минусом!")
+        return
+        
     if message.chat.type == 'private':
         bot.send_message(message.chat.id, "Привет! Как тебя подписать в сообщении?")
         user_states[message.chat.id] = {'step': 'get_name'}
-
 @bot.message_handler(func=lambda message: message.chat.type == 'private')
 def get_name(message):
     user_id = message.chat.id
