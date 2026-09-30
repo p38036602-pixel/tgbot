@@ -3,7 +3,7 @@ import telebot
 # ТОКЕН и ID группы Bothost подставит сам из настроек панели, здесь их менять не нужно!
 import os
 API_TOKEN = os.getenv('BOT_TOKEN') 
-GROUP_ID = os.getenv('GROUP_ID')    
+GROUP_ID = -1004463100483  
 
 bot = telebot.TeleBot(API_TOKEN)
 user_states = {}  # Хранилище имени автора: {chat_id: "Имя"}
